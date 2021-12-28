@@ -10,10 +10,14 @@ const create = (montantDachat, fondPropre, duree, intertAnnuel, capital) => {
     `/FirstResults?montantDachat=${montantDachat}&fondPropre=${fondPropre}&duree=${duree}&intertAnnuel=${intertAnnuel}&capital=${capital}`
   );
 };
+const remove = (id) => {
+  return http.delete(`/FirstResults/${id}`);
+};
 
 const FirstResultService = {
   get,
   create,
+  remove,
 };
 
 export default FirstResultService;

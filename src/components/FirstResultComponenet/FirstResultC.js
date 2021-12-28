@@ -49,30 +49,30 @@ const ResulttList = () => {
     )
       .then((response) => {
         setresult(response.data);
-        // setresult({
-        //   id: response.id,
-        //   montantDachat: response.montantDachat,
-        //   fraisDachat: response.fraisDachat,
-        //   fondPropre: response.fondPropre,
-        //   fraisDhypotheque: response.fraisDhypotheque,
-        //   mensualite: response.mensualite,
-        //   mentantEmpBrut: response.mentantEmpBrut,
-        //   mentantEmpNet: response.mentantEmpNet,
-        //   interetAnnuel: response.interetAnnuel,
-        //   interetMensuel: response.interetMensuel,
-        //   capital: response.capital,
-        //   amortissements: response.amortissements,
-        // });
-        console.log(result);
 
-        ///setSubmitted(true);
-        //  window.location.reload();
+        console.log(result);
         console.log(response);
       })
 
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  const deleteLigne = (e, id) => {
+    if (window.confirm("Are you sure ? ")) {
+      FirstResultService.remove(id)
+        .then((responce) => {
+          const tableData = result.filter((item) => item.id !== id);
+          console.log(responce.data);
+          console.log(tableData);
+
+          this.setState({ tableData });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
   };
 
   const handleAddrTypeChange = (event) => {
@@ -574,7 +574,7 @@ const ResulttList = () => {
                           <a
                             href="#"
                             className="btn btn-icon btn-light btn-hover-primary btn-sm"
-                            // onClick={(e) => deleteA(e, result.id)}
+                            onClick={(e) => deleteLigne(e, result.id)}
                           >
                             <span className="svg-icon svg-icon-md svg-icon-primary">
                               {/*begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg*/}
